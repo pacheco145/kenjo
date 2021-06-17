@@ -1,8 +1,9 @@
 .artists-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 16px;
-    margin-left: calc(16px + 5%);
+    max-width: 1000px;
+    margin: 16px auto;
 
     h1 {
         margin-right: 32px;

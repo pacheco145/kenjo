@@ -1,12 +1,13 @@
 .button {
     display: block;
-    padding: 10px 50px;
+    padding: 10px 0;
     border: 5px solid var(--green);
     border-radius: 26px;
     background-color: var(--dark);
     font-family: 'AdequateW01-Black',sans-serif;
     color: #fff;
     width: 100%;
+    min-width: 200px;
     text-align: center;
     letter-spacing: 2px;
     text-transform: uppercase;
