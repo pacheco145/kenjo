@@ -1,6 +1,8 @@
-import { PostAlbumService } from './../../shared/services/postAlbum/post-album.service';
+import { PostAlbumService } from './../../shared/services/albums/postAlbum/post-album.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {Album} from '../../shared/models/album.model'
 
 
 // interface Album {
@@ -18,24 +20,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AddAlbumComponent implements OnInit {
-  newAlbum;
-  
-  constructor(public formBuilder: FormBuilder, private postAlbum: PostAlbumService) {
-    this.newAlbum = this.formBuilder.group({
-      title: '',
-      artistId: '',
-      coverUrl: 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
-      year: '',
-      genre: '',
-    });
-  }
-  
+  constructor() { }
 
-  ngOnInit(): void {}
-
-
-  addAlbum = () => {
-    console.log(this.newAlbum.value)
-    this.postAlbum.addAlbum(this.newAlbum.value).subscribe(res=>console.log(res))
+  ngOnInit(): void {
   }
 }
