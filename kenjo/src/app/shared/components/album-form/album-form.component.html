@@ -1,0 +1,30 @@
+<div class="form-container">
+    <form action="/" method="post" [formGroup]="newAlbum" (ngSubmit)="addAlbum()">
+        <label for="title">
+            <p>Title:</p>
+            <input type="text" name="title" formControlName="title" placeholder="title" id="title">
+        </label>
+        
+        <!--><label for="artistId">
+            <p>ArtistId:</p>
+            <input type="text" name="artistId" formControlName="artistId" placeholder="artistId" id="artistId">
+        </label>-->
+        
+        <label for="coverUrl">
+            <p>CoverUrl:</p>
+            <input type="text" name="coverUrl" formControlName="coverUrl" placeholder="coverUrl" id="coverUrl">
+        </label>
+        
+        <label for="year">
+            <p>Year:</p>
+            <input type="number" name="year" formControlName="year" placeholder="year" id="year">
+        </label>
+        
+        <label for="genre">
+            <p>Genre:</p>
+            <input type="text" name="genre" formControlName="genre" placeholder="genre" id="genre">
+        </label>
+        <!-- <button type="submit">Add album</button> -->
+        <button class="button" type="submit">Add album</button>
+    </form>
+</div>

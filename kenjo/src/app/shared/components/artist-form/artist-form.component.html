@@ -1,0 +1,26 @@
+<div class="form-container">
+    <form action="/" method="post" [formGroup]="newArtist" (ngSubmit)="addArtist()">
+        <label for="name">
+            <p>name:</p>
+            <input type="text" name="name" formControlName="name" placeholder="name" id="name">
+        </label>
+        
+        <label for="photoUrl">
+            <p>photoUrl:</p>
+            <input type="text" name="photoUrl" formControlName="photoUrl" placeholder="photoUrl" id="photoUrl">
+        </label>
+        
+        <label for="birthdate">
+            <p>birthdate:</p>
+            <input type="date" name="birthdate" formControlName="birthdate" placeholder="birthdate" id="birthdate">
+        </label>
+        
+        <label for="deathDate">
+            <p>deathDate:</p>
+            <input type="date" name="deathDate" formControlName="deathDate" placeholder="deathDate" id="deathDate">
+        </label>
+        
+        <!-- <button type="submit">Add album</button> -->
+        <button class="button" type="submit">Add album</button>
+    </form>
+</div>
