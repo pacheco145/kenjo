@@ -1,0 +1,13 @@
+<div class="artist-detail">
+    <div class="artist-detail__image">
+        <img src={{artist.photoUrl}} alt="">
+    </div>
+    <div class="artist-detail__info">
+        <h1>{{artist.name}}</h1>
+        <p>Date of birth: {{artist.birthdate}}</p>
+        <p>Date of death: {{artist._id}}</p>
+    </div>
+</div>
+<div class="button-container">
+    <button [routerLink]="['/artist', artist._id, 'add-album']">Add album</button>
+</div>
