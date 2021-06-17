@@ -1,0 +1,37 @@
+.button {
+    display: block;
+    padding: 10px 50px;
+    border: 5px solid var(--green);
+    border-radius: 26px;
+    background-color: var(--dark);
+    font-family: 'AdequateW01-Black',sans-serif;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+    background-color: var(--green);
+}
+
+form .button {
+    margin: 32px auto;
+}
+
+input {
+    display: block;
+    padding: 10px 10px;
+    width: 250px;
+    border: 1px solid var(--soft-dark);
+    border-radius: 6px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+label p {
+    color: var(--soft-dark);
+}

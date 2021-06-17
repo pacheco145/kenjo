@@ -1,0 +1,43 @@
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    padding: 32px;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.item {
+    &__image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .3s ease-in-out;
+        }
+    }
+    &__info {
+        text-align: center;
+        margin-top: 8px;
+        transition: .3s ease-in-out;
+        h2 {
+            font-size: 16px;
+        }
+        p {
+            font-weight: 100;
+            font-size: 14px;
+        }
+    }
+
+    &:hover {
+        .item__image img {
+            transform: scale(1.05);
+        }
+        .item__info {
+            color: var(--green);
+        }
+    }
+}
