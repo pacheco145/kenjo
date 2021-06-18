@@ -12,3 +12,13 @@
     }
 }
 
+@media (max-width: 450px) {
+    .artists-header {
+        flex-direction: column;
+        text-align: center;
+        h1 {
+            margin-right: 0;
+            margin-bottom: 16px;
+        }
+    }
+  }

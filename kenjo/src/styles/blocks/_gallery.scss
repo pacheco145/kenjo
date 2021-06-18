@@ -42,3 +42,12 @@
         }
     }
 }
+
+@media (max-width: 450px) {
+    .items-container {
+        grid-template-columns: repeat(auto-fill, 300px);
+    }
+    .item__image {
+        height: 300px;
+    }
+  }

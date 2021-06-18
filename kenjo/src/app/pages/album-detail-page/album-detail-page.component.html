@@ -7,7 +7,9 @@
         <h2 class="artist-link" [routerLink]="['/artist/', artistId]">{{artistName}}</h2>
         <p>Music genre: {{album.genre}}</p>
         <p>Year: {{album.year}}</p>
-        <button class="button" [routerLink]="['/album', album._id, 'edit-album']">Edit</button>
-        <button class="button" (click)="removeAlbum()" >Delete</button>
+        <div class="item-detail__buttons">
+            <button class="button" [routerLink]="['/album', album._id, 'edit-album']">Edit</button>
+            <button class="button" (click)="removeAlbum()" >Delete</button>
+        </div>
     </div>
 </div>
