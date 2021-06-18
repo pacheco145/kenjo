@@ -9,3 +9,16 @@
         <button class="button" [routerLink]="['/artist', artist._id, 'add-album']">Add album</button>
     </div>
 </div>
+
+<div class="items-container">
+    <div class="item" *ngFor="let album of albumsOfArtist">
+        <a href="/" [routerLink]="['/album/', album._id]">
+            <div class="item__image">
+                <img src={{album.coverUrl}} alt="">
+            </div>
+            <div class="item__info">
+                <h2>{{album.title}}</h2>
+            </div>
+        </a>
+    </div>
+</div>
