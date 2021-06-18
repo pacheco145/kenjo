@@ -4,8 +4,8 @@
     </div>
     <div class="item-detail__info">
         <h1>{{artist.name}}</h1>
-        <p>Date of birth: {{artist.birthdate}}</p>
-        <p>Date of death: {{artist._id}}</p>
+        <p>Date of birth: {{artist.birthdate | date:'fullDate' }}</p>
+        <p>Date of death: {{artist.deathDate ? artist.deathDate : '/'}}</p>
         <button class="button" [routerLink]="['/artist', artist._id, 'add-album']">Add album</button>
     </div>
 </div>
