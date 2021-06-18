@@ -35,7 +35,7 @@ export class ArtistFormComponent implements OnInit {
 
     this.newArtist = this.formBuilder.group({
       name: '',
-      photoUrl: 'https://los40.com/los40/imagenes/2019/10/18/los40classic/1571386693_641304_1571387117_miniatura_normal.jpg',
+      photoUrl: '',
       birthdate: '',
       deathDate: null,
     });
@@ -81,12 +81,14 @@ export class ArtistFormComponent implements OnInit {
 
 
   addArtist = () => {
-    console.log(this.newArtist.value)
+    // console.log(this.newArtist.value)
+    if (!this.newArtist.value.photoUrl) {
+      this.newArtist.value.photoUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
+    }
     this.postArtist.addArtist(this.newArtist.value).subscribe(res=>console.log(res))
   }
 
   editArtist = () => {
-    // this.newArtist.value.artistId = this.props.album.artistId;
     this.putArtist.putArtist(this.id, this.newArtist.value).subscribe()
   }
 

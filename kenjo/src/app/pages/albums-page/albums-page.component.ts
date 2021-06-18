@@ -28,7 +28,6 @@ export class AlbumsPageComponent implements OnInit {
   listAlbums = () => this.getAllAlbums.getAlbums().subscribe(res=> {
     this.albums = res;
     this.artistOfAlbumFunction(this.albums)
-    // console.log(res)
   })
 
   artistOfAlbumFunction = (albums:any) => {
@@ -36,13 +35,11 @@ export class AlbumsPageComponent implements OnInit {
       let artists = res
       albums.forEach((album:any) => {
         artists.forEach((artist:any) => {
-          console.log('artistId',artist._id)
-          console.log('albumId',album._id)
           if (artist._id === album.artistId) {
             album.artistName = artist.name
           }
         })
-        console.log(album.artistName)
+        // console.log(album.artistName)
       });
     } )
   }

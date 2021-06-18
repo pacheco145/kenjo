@@ -34,13 +34,13 @@ export class AlbumFormComponent implements OnInit, OnChanges {
 
     this.newAlbum = this.formBuilder.group({
       title: '',
-      coverUrl: 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
+      coverUrl: '',
       year: '',
       genre: '',
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.props.req)
+    // console.log(this.props.req)
     if (this.props.req === "put") throw new Error('Method not implemented.');
   }
   
@@ -52,19 +52,16 @@ export class AlbumFormComponent implements OnInit, OnChanges {
       this.setFormValues()
       this.button = 'edit album'
     }
-    // console.log(this.newAlbum.value)
-    // console.log('req',this.req)
-    // console.log('id',this.id)
   }
 
 
   setFormValues = () => {
-    console.log(this.props.album)
+    let album = this.props.album
     this.newAlbum.setValue({
-      title: this.props.album.title,
-      coverUrl: this.props.album.coverUrl,
-      year: this.props.album.year,
-      genre: this.props.album.genre,
+      title: album.title,
+      coverUrl: album.coverUrl,
+      year: album.year,
+      genre: album.genre,
     })
   }
 
@@ -79,6 +76,9 @@ export class AlbumFormComponent implements OnInit, OnChanges {
   
   addAlbum = () => {
     this.newAlbum.value.artistId = this.id;
+    if (!this.newAlbum.value.coverUrl) {
+      this.newAlbum.value.coverUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
+    }
     this.postAlbum.addAlbum(this.newAlbum.value).subscribe()
   }
 
