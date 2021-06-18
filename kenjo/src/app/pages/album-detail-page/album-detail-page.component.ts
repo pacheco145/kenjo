@@ -1,6 +1,7 @@
+import { DeleteAlbumService } from './../../shared/services/albums/deleteAlbum/delete-album.service';
 import { GetAlbumService } from './../../shared/services/albums/getAlbum/get-album.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GetArtistService } from 'src/app/shared/services/artists/getArtist/get-artist.service';
 
 @Component({
@@ -12,7 +13,13 @@ export class AlbumDetailPageComponent implements OnInit {
 
   id:string = '';
 
-  constructor(private route: ActivatedRoute, private getOneAlbum: GetAlbumService, private getAlbumArtist: GetArtistService) { 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private getOneAlbum: GetAlbumService, 
+    private getAlbumArtist: GetArtistService,
+    private deleteAlbum: DeleteAlbumService
+  ) { 
     this.route.params.subscribe(params => {
       this.id = params['id']
     })
@@ -41,6 +48,11 @@ export class AlbumDetailPageComponent implements OnInit {
       // console.log(res.name)
       this.artistName = res.name
     })
+  }
+
+  removeAlbum = () => {
+    this.router.navigateByUrl('/albums');
+    this.deleteAlbum.deleteAlbum(this.id)
   }
 
 }
