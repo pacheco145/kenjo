@@ -45,4 +45,6 @@ export class ArtistDetailPageComponent implements OnInit {
     // console.log(this.id)
     console.log(this.albumsOfArtist)
   })
+
+  removeArtist = () => console.log('delete artist not implemented')
 }

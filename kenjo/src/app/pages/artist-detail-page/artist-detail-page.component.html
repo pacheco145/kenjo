@@ -7,6 +7,8 @@
         <p>Date of birth: {{artist.birthdate | date:'fullDate' }}</p>
         <p>Date of death: {{artist.deathDate ? artist.deathDate : '/'}}</p>
         <button class="button" [routerLink]="['/artist', artist._id, 'add-album']">Add album</button>
+        <button class="button" [routerLink]="['/artist', artist._id, 'edit-artist']">Edit</button>
+        <button class="button" (click)="removeArtist()" >Delete</button>
     </div>
 </div>
 

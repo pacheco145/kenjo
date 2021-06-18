@@ -15,6 +15,7 @@ import { ArtistDetailPageComponent } from './pages/artist-detail-page/artist-det
 import { AlbumFormComponent } from './shared/components/album-form/album-form.component';
 import { ArtistFormComponent } from './shared/components/artist-form/artist-form.component';
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
+import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
     AlbumFormComponent,
     ArtistFormComponent,
     EditAlbumComponent,
+    EditArtistComponent,
   ],
   imports: [
     BrowserModule,
