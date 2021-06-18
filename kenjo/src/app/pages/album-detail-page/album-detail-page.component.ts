@@ -27,6 +27,7 @@ export class AlbumDetailPageComponent implements OnInit {
   
   album:any;
   artistName:any;
+  artistId:any;
   
   ngOnInit(): void {
     // console.log(this.id)
@@ -45,8 +46,9 @@ export class AlbumDetailPageComponent implements OnInit {
 
   artist = (artistId:string) => {
     this.getAlbumArtist.getArtistById(artistId).subscribe((res:any) => {
-      // console.log(res.name)
-      this.artistName = res.name
+      console.log(res)
+      this.artistName = res.name;
+      this.artistId = res._id;
     })
   }
 

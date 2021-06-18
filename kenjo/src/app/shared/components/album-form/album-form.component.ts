@@ -71,7 +71,7 @@ export class AlbumFormComponent implements OnInit, OnChanges {
   chooseCrud = async() => {
     if (this.props.req === "post") await this.addAlbum()
     else if (this.props.req === "put") await this.editAlbum()
-    // this.router.navigateByUrl('/albums');
+    this.router.navigateByUrl('/albums');
   }
 
   

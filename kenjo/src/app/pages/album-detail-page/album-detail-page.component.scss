@@ -1,0 +1,8 @@
+.artist-link {
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    
+    &:hover {
+        color: var(--green);
+    }
+}

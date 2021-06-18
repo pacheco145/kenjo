@@ -9,6 +9,7 @@ import { ArtistsPageComponent } from './pages/artists-page/artists-page.componen
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/albums', pathMatch: 'full'},
   {path: 'artists', component: ArtistsPageComponent},
   {path: 'add-artist', component: AddArtistComponent},
   {path: 'artist/:id', component: ArtistDetailPageComponent},
