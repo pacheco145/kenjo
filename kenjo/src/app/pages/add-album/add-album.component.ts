@@ -5,13 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import {Album} from '../../shared/models/album.model'
 
 
-// interface Album {
-//   title: string;
-//   artistId: string;
-//   coverUrl: string;
-//   year: number;
-//   genre: string;
-// }
 
 @Component({
   selector: 'app-add-album',
@@ -21,6 +14,10 @@ import {Album} from '../../shared/models/album.model'
 
 export class AddAlbumComponent implements OnInit {
   constructor() { }
+
+  propsAdd:any = {
+    req: "post",
+  }
 
   ngOnInit(): void {
   }

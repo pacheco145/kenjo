@@ -7,7 +7,7 @@
         <h2>{{artistName}}</h2>
         <p>Music genre: {{album.genre}}</p>
         <p>Year: {{album.year}}</p>
-        <button class="button">Edit</button>
+        <button class="button" [routerLink]="['/album', album._id, 'edit-album']">Edit</button>
         <button class="button">Delete</button>
     </div>
 </div>

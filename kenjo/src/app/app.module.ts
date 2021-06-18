@@ -14,6 +14,7 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { ArtistDetailPageComponent } from './pages/artist-detail-page/artist-detail-page.component';
 import { AlbumFormComponent } from './shared/components/album-form/album-form.component';
 import { ArtistFormComponent } from './shared/components/artist-form/artist-form.component';
+import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ArtistFormComponent } from './shared/components/artist-form/artist-form
     ArtistDetailPageComponent,
     AlbumFormComponent,
     ArtistFormComponent,
+    EditAlbumComponent,
   ],
   imports: [
     BrowserModule,

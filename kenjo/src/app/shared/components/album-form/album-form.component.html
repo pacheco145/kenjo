@@ -1,5 +1,5 @@
 <div class="form-container">
-    <form action="/" method="post" [formGroup]="newAlbum" (ngSubmit)="addAlbum()">
+    <form action="/" method="post" [formGroup]="newAlbum" (ngSubmit)="chooseCrud()">
         <label for="title">
             <p>Title:</p>
             <input type="text" name="title" formControlName="title" placeholder="title" id="title">
@@ -25,6 +25,6 @@
             <input type="text" name="genre" formControlName="genre" placeholder="genre" id="genre">
         </label>
         <!-- <button type="submit">Add album</button> -->
-        <button class="button" type="submit">Add album</button>
+        <button class="button" type="submit">{{button}}</button>
     </form>
 </div>

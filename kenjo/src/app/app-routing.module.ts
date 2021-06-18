@@ -6,6 +6,7 @@ import { AddArtistComponent } from './pages/add-artist/add-artist.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArtistsPageComponent } from './pages/artists-page/artists-page.component';
+import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 
 const routes: Routes = [
   {path: 'artists', component: ArtistsPageComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'artist/:id/add-album', component: AddAlbumComponent},
   {path: 'albums', component: AlbumsPageComponent},
   {path: 'album/:id', component: AlbumDetailPageComponent},
+  {path: 'album/:id/edit-album', component: EditAlbumComponent},
 ];
 
 @NgModule({
