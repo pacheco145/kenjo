@@ -9,7 +9,14 @@
             </div>
             <div class="item__info">
                 <h2>{{album.title}}</h2>
-                <p>{{album.artistName}}</p>
+
+                <!-- If you delete an artist his albums become orphans, yo may wanna delete 
+                    them or leave them but red color points them out -->
+                    
+                <p [ngStyle]="{'color': album.artistName ? 'inherit' : 'red'}">
+                    {{album.artistName ? album.artistName : "Missing artist"}}
+                </p>
+            
             </div>
         </a>
     </div>

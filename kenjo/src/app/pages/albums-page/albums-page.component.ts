@@ -35,8 +35,14 @@ export class AlbumsPageComponent implements OnInit {
     this.getAllArtists.getArtists().subscribe((res:any)=>{
       let artists = res
       albums.forEach((album:any) => {
-        album.artistName = artists.find((artist:any) => artist._id === album.artistId).name
-        // console.log(album.artistName)
+        artists.forEach((artist:any) => {
+          console.log('artistId',artist._id)
+          console.log('albumId',album._id)
+          if (artist._id === album.artistId) {
+            album.artistName = artist.name
+          }
+        })
+        console.log(album.artistName)
       });
     } )
   }
