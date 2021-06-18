@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class DeleteArtistService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
+
+  deleteArtist = (artistId:string) => {
+    this.http.delete(`http://localhost:3000/artist/${artistId}`).subscribe()
+  }
+
 }

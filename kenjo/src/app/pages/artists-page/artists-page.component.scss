@@ -3,7 +3,8 @@
     justify-content: space-between;
     align-items: center;
     max-width: 1000px;
-    margin: 16px auto;
+    margin: 16px calc(16px + 5%);
+    flex-wrap: wrap;
 
     h1 {
         margin-right: 32px;

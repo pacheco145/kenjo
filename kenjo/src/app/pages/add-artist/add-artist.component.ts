@@ -10,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddArtistComponent implements OnInit {
 
+  propsAdd:any = {
+    req: "post",
+  }
+
   constructor() { }
 
   ngOnInit(): void {

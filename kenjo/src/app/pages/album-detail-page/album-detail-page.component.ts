@@ -53,8 +53,8 @@ export class AlbumDetailPageComponent implements OnInit {
   }
 
   removeAlbum = () => {
-    this.router.navigateByUrl('/albums');
     this.deleteAlbum.deleteAlbum(this.id)
+    this.router.navigateByUrl('/albums');
   }
 
 }

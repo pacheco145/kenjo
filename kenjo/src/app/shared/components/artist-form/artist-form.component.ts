@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { PostArtistService } from '../../services/artists/postArtist/post-artist.service';
@@ -22,6 +22,7 @@ export class ArtistFormComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public formBuilder: FormBuilder, 
     private getArtist: GetArtistService,
     private postArtist: PostArtistService,
@@ -68,7 +69,7 @@ export class ArtistFormComponent implements OnInit {
   chooseCrud = async() => {
     if (this.props.req === "post") await this.addArtist()
     else if (this.props.req === "put") await this.editArtist()
-    // this.router.navigateByUrl('/albums');
+    this.router.navigateByUrl('/artists');
   }
 
   getArtistInfo = () => {
