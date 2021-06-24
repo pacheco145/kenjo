@@ -11,6 +11,7 @@ import { AlbumsService } from 'src/app/shared/services/albums/albums.service';
 export class AlbumDetailPageComponent implements OnInit {
 
   id:string = '';
+  removeCheck = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +50,8 @@ export class AlbumDetailPageComponent implements OnInit {
       this.artistId = res._id;
     })
   }
+
+  clickRemove = () => this.removeCheck = !this.removeCheck;
 
   removeAlbum = () => {
     this.albumsService.deleteAlbum(this.id)

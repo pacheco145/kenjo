@@ -10,7 +10,12 @@ data-aos-duration="700" data-aos-offset="100">
         <p>Year: {{album.year}}</p>
         <div class="item-detail__buttons">
             <button class="button" [routerLink]="['/album', album._id, 'edit-album']">Edit</button>
-            <button class="button" (click)="removeAlbum()" >Delete</button>
+            <button class="button" *ngIf="!removeCheck" (click)="clickRemove()" >Delete</button>
+            <div class="item-detail__checkDelete" *ngIf="removeCheck">
+                <span>Are you sure you want to delete the album?</span>
+                <button class="button" (click)="removeAlbum()" >Yes, delete</button>
+                <button class="button" (click)="clickRemove()" >No</button>
+            </div>
         </div>
     </div>
 </div>

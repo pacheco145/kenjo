@@ -11,6 +11,7 @@ import { ArtistsService } from 'src/app/shared/services/artist/artists.service';
 export class ArtistDetailPageComponent implements OnInit {
 
   id:string = '';
+  removeCheck = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -47,6 +48,8 @@ export class ArtistDetailPageComponent implements OnInit {
     });
     // console.log(this.albumsOfArtist)
   })
+
+  clickRemove = () => this.removeCheck = !this.removeCheck;
 
   removeArtist = () => {
     this.artistsService.deleteArtist(this.id)

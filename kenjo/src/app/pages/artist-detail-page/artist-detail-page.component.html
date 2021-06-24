@@ -14,8 +14,12 @@ data-aos-duration="700" data-aos-offset="100">
             <button class="button" [routerLink]="['/artist', artist._id, 'edit-artist']">
                 Edit
             </button>
-            <button class="button" (click)="removeArtist()" >Delete</button>
-
+            <button class="button" *ngIf="!removeCheck" (click)="clickRemove()" >Delete</button>
+            <div class="item-detail__checkDelete" *ngIf="removeCheck">
+                <span>Are you sure you want to delete the artist?</span>
+                <button class="button" (click)="removeArtist()" >Yes, delete</button>
+                <button class="button" (click)="clickRemove()" >No</button>
+            </div>
         </div>
     </div>
 </div>

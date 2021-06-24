@@ -46,6 +46,10 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    &__checkDelete {
+        margin-top: 20px;
+    }
 }
 
 @media (max-width: 800px) {
