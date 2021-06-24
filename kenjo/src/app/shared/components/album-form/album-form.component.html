@@ -1,27 +1,31 @@
 <div class="form-container">
-    <form action="/" method="post" [formGroup]="newAlbum" (ngSubmit)="chooseCrud()">
-        <label for="title">
+    <form class="form" action="/" method="post" [formGroup]="newAlbum" (ngSubmit)="chooseCrud()">
+        <label class="form__label" for="title">
             <p>Title:</p>
-            <input type="text" name="title" formControlName="title" placeholder="title" id="title">
+            <input class="form__input" type="text" name="title" formControlName="title" placeholder="Title" id="title">
+            <span class="form__valid" *ngIf="!newAlbum.get('title').valid && submitted">* Title required</span>
         </label>
         
-        <label for="coverUrl">
-            <p>CoverUrl:</p>
-            <input type="text" name="coverUrl" formControlName="coverUrl" placeholder="coverUrl" id="coverUrl">
-            <span *ngIf="!newAlbum.get('coverUrl').valid && submitted">* Url required</span>
+        <label class="form__label" for="coverUrl">
+            <p>Picture url:</p>
+            <input class="form__input" type="text" name="coverUrl" formControlName="coverUrl" placeholder="Picture url" id="coverUrl">
+            <span class="form__valid" *ngIf="!newAlbum.get('coverUrl').valid && submitted">
+                * {{newAlbum.get('coverUrl').errors.required ? 'Picture required' : 'Not valid url'}}
+            </span>
         </label>
         
-        <label for="year">
+        <label class="form__label" for="year">
             <p>Year:</p>
-            <input type="number" name="year" formControlName="year" placeholder="year" id="year">
-            <span *ngIf="!newAlbum.get('year').valid && submitted">
+            <input class="form__input" type="number" name="year" formControlName="year" placeholder="Year" id="year">
+            <span class="form__valid" *ngIf="!newAlbum.get('year').valid && submitted">
                 * {{newAlbum.get('year').errors.required ? 'Date required' : 'Date should be between 0 and current dates'}}
             </span>
         </label>
         
-        <label for="genre">
+        <label class="form__label" for="genre">
             <p>Genre:</p>
-            <input type="text" name="genre" formControlName="genre" placeholder="genre" id="genre">
+            <input class="form__input" type="text" name="genre" formControlName="genre" placeholder="Genre" id="genre">
+            <span class="form__valid" *ngIf="!newAlbum.get('genre').valid && submitted">* Genre required</span>
         </label>
         <!-- <button type="submit">Add album</button> -->
         <button class="button" type="submit">{{button}}</button>

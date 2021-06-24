@@ -46,12 +46,13 @@ export class AlbumFormComponent implements OnInit {
   ngOnInit(): void {
     console.log('ID',this.id, typeof this.id)
     
-    // this.newAlbum.value.artistId = this.id;
-    if (this.props.req ==="put") {
-      this.button = 'edit album'
-      this.getAlbumInfo()
-    }
+    this.setButtonValues()
+    if (this.props.req ==="put") this.getAlbumInfo()
+  }
+  
+  setButtonValues = () => {
     if (this.props.req ==="post") this.button = 'add album'
+    if (this.props.req ==="put") this.button = 'edit album'
   }
 
 

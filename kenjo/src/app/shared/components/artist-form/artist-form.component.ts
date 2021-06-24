@@ -1,8 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ArtistsService } from '../../services/artist/artists.service';
+
+
+const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
 @Component({
   selector: 'app-artist-form',
@@ -15,9 +18,10 @@ export class ArtistFormComponent implements OnInit {
 
   id:any;
   // artist:any;
-  newArtist;
+  newArtist:any;
   button:any;
   message:string = '';
+  submitted: boolean = false;
   
   constructor(
     private route: ActivatedRoute,
@@ -31,16 +35,16 @@ export class ArtistFormComponent implements OnInit {
       })
 
     this.newArtist = this.formBuilder.group({
-      name: '',
-      photoUrl: '',
-      birthdate: '',
-      deathDate: null,
+      name: ['', Validators.required],
+      photoUrl: ['', [Validators.required, Validators.pattern(urlReg)]],
+      birthdate: ['', Validators.required],
+      deathDate: '',
     });
   }
   
 
   ngOnInit(): void {
-    console.log('PROPS',this.props)
+    // console.log('PROPS',this.props)
     this.setButtonValue()
     if (this.props.req === "put") this.getArtistInfo()
   }
@@ -64,9 +68,12 @@ export class ArtistFormComponent implements OnInit {
   }
 
   chooseCrud = async() => {
-    if (this.props.req === "post") await this.addArtist()
-    else if (this.props.req === "put") await this.editArtist()
-    // this.router.navigateByUrl('/artists');
+    this.submitted = true;
+    if (this.newArtist.valid) {
+      if (this.props.req === "post") await this.addArtist()
+      else if (this.props.req === "put") await this.editArtist()
+      // this.router.navigateByUrl('/artists');
+    }
   }
 
   getArtistInfo = () => {

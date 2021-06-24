@@ -1,23 +1,28 @@
 <div class="form-container">
-    <form action="/" method="post" [formGroup]="newArtist" (ngSubmit)="chooseCrud()">
-        <label for="name">
-            <p>name:</p>
-            <input type="text" name="name" formControlName="name" placeholder="name" id="name">
+    <form class="form" action="/" method="post" [formGroup]="newArtist" (ngSubmit)="chooseCrud()">
+        <label class="form__label" for="name">
+            <p>Name:</p>
+            <input class="form__input" type="text" name="name" formControlName="name" placeholder="name" id="name">
+            <span class="form__valid" *ngIf="!newArtist.get('name').valid && submitted">* Name required</span>
         </label>
         
-        <label for="photoUrl">
-            <p>photoUrl:</p>
-            <input type="text" name="photoUrl" formControlName="photoUrl" placeholder="photoUrl" id="photoUrl">
+        <label class="form__label" for="photoUrl">
+            <p>Picture url:</p>
+            <input class="form__input" type="text" name="photoUrl" formControlName="photoUrl" placeholder="Picture url" id="photoUrl">
+            <span *ngIf="!newArtist.get('photoUrl').valid && submitted" class="form__valid">
+                * {{newArtist.get('photoUrl').errors.required ? 'Picture required' : 'Not valid url'}}
+            </span>
         </label>
         
-        <label for="birthdate">
-            <p>birthdate:</p>
-            <input type="date" name="birthdate" formControlName="birthdate" placeholder="birthdate" id="birthdate">
+        <label class="form__label" for="birthdate">
+            <p>Birthdate:</p>
+            <input class="form__input" type="date" name="birthdate" formControlName="birthdate" placeholder="birthdate" id="birthdate">
+            <span class="form__valid" *ngIf="!newArtist.get('birthdate').valid && submitted">* Birthdate required</span>
         </label>
         
-        <label for="deathDate">
-            <p>deathDate:</p>
-            <input type="date" name="deathDate" formControlName="deathDate" placeholder="deathDate" id="deathDate">
+        <label class="form__label" for="deathDate">
+            <p>Death date:</p>
+            <input class="form__input" type="date" name="deathDate" formControlName="deathDate" placeholder="deathDate" id="deathDate">
         </label>
         
         <!-- <button type="submit">Add album</button> -->
