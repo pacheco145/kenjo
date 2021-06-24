@@ -17,6 +17,7 @@ export class ArtistFormComponent implements OnInit {
   // artist:any;
   newArtist;
   button:any;
+  message:string = '';
   
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +42,6 @@ export class ArtistFormComponent implements OnInit {
   ngOnInit(): void {
     console.log('PROPS',this.props)
     this.setButtonValue()
-    this.getArtistInfo()
     if (this.props.req === "put") this.getArtistInfo()
   }
 
@@ -66,7 +66,7 @@ export class ArtistFormComponent implements OnInit {
   chooseCrud = async() => {
     if (this.props.req === "post") await this.addArtist()
     else if (this.props.req === "put") await this.editArtist()
-    this.router.navigateByUrl('/artists');
+    // this.router.navigateByUrl('/artists');
   }
 
   getArtistInfo = () => {
@@ -82,11 +82,19 @@ export class ArtistFormComponent implements OnInit {
     if (!this.newArtist.value.photoUrl) {
       this.newArtist.value.photoUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
     }
-    this.artistService.addArtist(this.newArtist.value).subscribe(res=>console.log(res))
+    this.artistService.addArtist(this.newArtist.value).then(res=>{
+      // console.log('RES', res)
+      if (!res.error) this.message = 'Artist added correctly'
+      else this.message = res.error.error
+    })
   }
 
   editArtist = () => {
-    this.artistService.putArtist(this.id, this.newArtist.value).subscribe()
+    this.artistService.putArtist(this.id, this.newArtist.value).then(res=>{
+      // console.log('RES', res)
+      if (!res.error) this.message = 'Artist edited correctly'
+      else this.message = res.error.error
+    })
   }
 
 }

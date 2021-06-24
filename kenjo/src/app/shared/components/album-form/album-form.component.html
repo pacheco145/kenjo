@@ -8,11 +8,15 @@
         <label for="coverUrl">
             <p>CoverUrl:</p>
             <input type="text" name="coverUrl" formControlName="coverUrl" placeholder="coverUrl" id="coverUrl">
+            <span *ngIf="!newAlbum.get('coverUrl').valid && submitted">* Url required</span>
         </label>
         
         <label for="year">
             <p>Year:</p>
             <input type="number" name="year" formControlName="year" placeholder="year" id="year">
+            <span *ngIf="!newAlbum.get('year').valid && submitted">
+                * {{newAlbum.get('year').errors.required ? 'Date required' : 'Date should be between 0 and current dates'}}
+            </span>
         </label>
         
         <label for="genre">
@@ -21,5 +25,6 @@
         </label>
         <!-- <button type="submit">Add album</button> -->
         <button class="button" type="submit">{{button}}</button>
+        <span *ngIf="message" class="error">* {{message}}</span>
     </form>
 </div>

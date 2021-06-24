@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {environment} from '../../../../environments/environment.prod';
 import {Album} from '../../models/album.model'
@@ -22,12 +22,24 @@ export class AlbumsService {
 
   addAlbum = (newAlbum: Album) => {
     return this.http.post(this.urlAlbum, newAlbum)
+      .toPromise()
+      .then(
+        res => res,
+        msg => msg
+      );
   }
 
-  putAlbum = (albumId:string, albumEdited:Album) => this.http.put(`${this.urlAlbum}/${albumId}`, albumEdited)
+  putAlbum = (albumId:string, albumEdited:Album) => {
+    return this.http.put(`${this.urlAlbum}/${albumId}`, albumEdited)
+      .toPromise()
+      .then(
+        res => res,
+        msg => msg
+      );
+  }
 
   deleteAlbum = (albumId:string) => {
-    this.http.delete(`${this.urlAlbum}/${albumId}`).subscribe()
+    this.http.delete(`${this.urlAlbum}/${albumId}`).toPromise()
   }
 
 

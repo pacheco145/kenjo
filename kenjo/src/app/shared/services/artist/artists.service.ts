@@ -21,12 +21,24 @@ export class ArtistsService {
 
   addArtist = (newArtist: any) => {
     return this.http.post(this.urlArtist, newArtist)
+      .toPromise()
+        .then(
+          res => res,
+          msg => msg
+        );
   }
 
-  putArtist = (artistId:string, artistEdited:Artist) => this.http.put(`${this.urlArtist}/${artistId}`, artistEdited)
+  putArtist = (artistId:string, artistEdited:Artist) => {
+    return this.http.put(`${this.urlArtist}/${artistId}`, artistEdited)
+      .toPromise()
+        .then(
+          res => res,
+          msg => msg
+        );
+  }
 
   deleteArtist = (artistId:string) => {
-    this.http.delete(`${this.urlArtist}/${artistId}`).subscribe()
+    this.http.delete(`${this.urlArtist}/${artistId}`).toPromise()
   }
 
 

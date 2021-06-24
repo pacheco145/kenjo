@@ -1,7 +1,9 @@
 import { AlbumsService } from '../../services/albums/albums.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+
+const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
 @Component({
   selector: 'app-album-form',
@@ -16,6 +18,9 @@ export class AlbumFormComponent implements OnInit {
   newAlbum:any;
   id:any;
   button:any;
+  currentYear = new Date().getFullYear();
+  submitted: boolean = false;
+  message:string = '';
   
   constructor(
     private route: ActivatedRoute, 
@@ -30,22 +35,18 @@ export class AlbumFormComponent implements OnInit {
   
 
     this.newAlbum = this.formBuilder.group({
-      title: '',
-      coverUrl: '',
-      year: '',
-      genre: '',
+      title: ['', Validators.required],
+      coverUrl: ['', [Validators.required, Validators.pattern(urlReg)]],
+      year: ['', [Validators.required, Validators.min(0), Validators.max(this.currentYear)]],
+      genre: ['', Validators.required],
     });
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   // console.log(this.props.req)
-  //   if (this.props.req === "put") throw new Error('Method not implemented.');
-  // }
   
 
   ngOnInit(): void {
-    console.log('PROPS',this.props)
+    console.log('ID',this.id, typeof this.id)
     
-    this.newAlbum.value.artistId = this.id;
+    // this.newAlbum.value.artistId = this.id;
     if (this.props.req ==="put") {
       this.button = 'edit album'
       this.getAlbumInfo()
@@ -55,7 +56,7 @@ export class AlbumFormComponent implements OnInit {
 
 
   setFormValues = (album:any) => {
-    console.log(album)
+    // console.log(album)
     this.newAlbum.setValue({
       title: album.title,
       coverUrl: album.coverUrl,
@@ -65,9 +66,12 @@ export class AlbumFormComponent implements OnInit {
   }
 
   chooseCrud = async() => {
-    if (this.props.req === "post") await this.addAlbum()
-    else if (this.props.req === "put") await this.editAlbum()
-    this.router.navigateByUrl('/albums');
+    this.submitted = true
+    if (this.newAlbum.valid) {
+      if (this.props.req === "post") await this.addAlbum()
+      else if (this.props.req === "put") await this.editAlbum()
+      // this.router.navigateByUrl('/albums');
+    }
   }
 
   
@@ -75,15 +79,26 @@ export class AlbumFormComponent implements OnInit {
   
   addAlbum = () => {
     this.newAlbum.value.artistId = this.id;
-    if (!this.newAlbum.value.coverUrl) {
-      this.newAlbum.value.coverUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
-    }
-    this.albumsService.addAlbum(this.newAlbum.value).subscribe()
+    // console.log(this.newAlbum.value)
+    this.albumsService.addAlbum(this.newAlbum.value).then(res=>{
+      console.log('RES', res)
+      if (!res.error) this.message = 'Album added correctly'
+      else this.message = res.error.error
+    })
+    // .subscribe(res=>{
+    //   console.log('RES',this)
+    //   this.submitted = false;
+    // })
   }
 
   editAlbum = () => {
     this.newAlbum.value.artistId = this.album.artistId;
-    this.albumsService.putAlbum(this.id, this.newAlbum.value).subscribe()
+    // console.log(this.newAlbum.value)
+    this.albumsService.putAlbum(this.id, this.newAlbum.value).then(res=>{
+      console.log('RES', res)
+      if (!res.error) this.message = 'Album edited correctly'
+      else this.message = res.error.errors
+    })
   }
 
   getAlbumInfo = () => {
