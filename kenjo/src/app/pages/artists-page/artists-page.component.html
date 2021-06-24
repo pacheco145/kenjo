@@ -5,7 +5,8 @@
     </div>
 </div>
 <div class="items-container">
-    <div class="item" *ngFor="let artist of artists">
+    <div class="item" *ngFor="let artist of artists" data-aos="fade-up" data-aos-easing="linear"
+    data-aos-duration="700" data-aos-offset="100">
         <a href="" [routerLink]="['/artist/', artist._id]">
             <div class="item__image">
                 <img src={{artist.photoUrl}} alt="">

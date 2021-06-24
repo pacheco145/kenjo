@@ -1,10 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import { PostArtistService } from '../../services/artists/postArtist/post-artist.service';
-import { GetArtistService } from '../../services/artists/getArtist/get-artist.service';
 import { formatDate } from '@angular/common';
-import { PutArtistService } from '../../services/artists/putArtist/put-artist.service';
+import { ArtistsService } from '../../services/artist/artists.service';
 
 @Component({
   selector: 'app-artist-form',
@@ -24,9 +22,7 @@ export class ArtistFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder, 
-    private getArtist: GetArtistService,
-    private postArtist: PostArtistService,
-    private putArtist: PutArtistService,
+    private artistService: ArtistsService,
     ) {
 
       this.route.params.subscribe(params => {
@@ -43,19 +39,20 @@ export class ArtistFormComponent implements OnInit {
   
 
   ngOnInit(): void {
+    console.log('PROPS',this.props)
     this.setButtonValue()
     this.getArtistInfo()
     if (this.props.req === "put") this.getArtistInfo()
   }
 
   setButtonValue = () => {
-    if (this.props.req === "post") this.button = "Add album"
-    if (this.props.req === "put") this.button = "Edit album"
+    if (this.props.req === "post") this.button = "Add artist"
+    if (this.props.req === "put") this.button = "Edit artist"
   }
 
   setFormValues = (artist:any) => {
-    console.log(formatDate(artist.deathDate, 'yyyy-MM-dd', 'en'))
-    console.log(artist.deathDate)
+    // console.log(formatDate(artist.deathDate, 'yyyy-MM-dd', 'en'))
+    // console.log(artist.deathDate)
     if (artist.deathDate) artist.deathDate = formatDate(artist.deathDate, 'yyyy-MM-dd', 'en')
     
     this.newArtist.setValue({
@@ -73,7 +70,7 @@ export class ArtistFormComponent implements OnInit {
   }
 
   getArtistInfo = () => {
-    this.getArtist.getArtistById(this.id).subscribe(res => {
+    this.artistService.getArtistById(this.id).subscribe(res => {
       // this.artist = res;
       this.setFormValues(res)
     })
@@ -85,11 +82,11 @@ export class ArtistFormComponent implements OnInit {
     if (!this.newArtist.value.photoUrl) {
       this.newArtist.value.photoUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
     }
-    this.postArtist.addArtist(this.newArtist.value).subscribe(res=>console.log(res))
+    this.artistService.addArtist(this.newArtist.value).subscribe(res=>console.log(res))
   }
 
   editArtist = () => {
-    this.putArtist.putArtist(this.id, this.newArtist.value).subscribe()
+    this.artistService.putArtist(this.id, this.newArtist.value).subscribe()
   }
 
 }

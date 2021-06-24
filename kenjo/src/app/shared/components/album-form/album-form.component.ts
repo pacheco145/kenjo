@@ -1,30 +1,27 @@
-import { GetAlbumService } from './../../services/albums/getAlbum/get-album.service';
-import { PutAlbumService } from './../../services/albums/putAlbum/put-album.service';
+import { AlbumsService } from '../../services/albums/albums.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { PostAlbumService } from '../../services/albums/postAlbum/post-album.service';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-album-form',
   templateUrl: './album-form.component.html',
   styleUrls: ['./album-form.component.scss']
 })
-export class AlbumFormComponent implements OnInit, OnChanges {
+export class AlbumFormComponent implements OnInit {
 
  @Input() props:any;
 
   album:any;
   newAlbum:any;
   id:any;
-  button = 'Add album';
+  button:any;
   
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
     public formBuilder: FormBuilder, 
-    private postAlbum: PostAlbumService, 
-    private putAlbum: PutAlbumService
+    private albumsService: AlbumsService, 
   ) {
 
     this.route.params.subscribe(params => {
@@ -39,24 +36,26 @@ export class AlbumFormComponent implements OnInit, OnChanges {
       genre: '',
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.props.req)
-    if (this.props.req === "put") throw new Error('Method not implemented.');
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   // console.log(this.props.req)
+  //   if (this.props.req === "put") throw new Error('Method not implemented.');
+  // }
   
 
   ngOnInit(): void {
+    console.log('PROPS',this.props)
+    
     this.newAlbum.value.artistId = this.id;
-    this.album = this.props.album;
     if (this.props.req ==="put") {
-      this.setFormValues()
       this.button = 'edit album'
+      this.getAlbumInfo()
     }
+    if (this.props.req ==="post") this.button = 'add album'
   }
 
 
-  setFormValues = () => {
-    let album = this.props.album
+  setFormValues = (album:any) => {
+    console.log(album)
     this.newAlbum.setValue({
       title: album.title,
       coverUrl: album.coverUrl,
@@ -79,12 +78,19 @@ export class AlbumFormComponent implements OnInit, OnChanges {
     if (!this.newAlbum.value.coverUrl) {
       this.newAlbum.value.coverUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
     }
-    this.postAlbum.addAlbum(this.newAlbum.value).subscribe()
+    this.albumsService.addAlbum(this.newAlbum.value).subscribe()
   }
 
   editAlbum = () => {
-    this.newAlbum.value.artistId = this.props.album.artistId;
-    this.putAlbum.putAlbum(this.id, this.newAlbum.value).subscribe()
+    this.newAlbum.value.artistId = this.album.artistId;
+    this.albumsService.putAlbum(this.id, this.newAlbum.value).subscribe()
+  }
+
+  getAlbumInfo = () => {
+    this.albumsService.getAlbumById(this.id).subscribe((res:any) => {
+      this.album = res;
+      this.setFormValues(res)
+    })
   }
 
 }

@@ -1,5 +1,3 @@
-import { PostArtistService } from '../../shared/services/artists/postArtist/post-artist.service';
-import { PostAlbumService } from './../../shared/services/albums/postAlbum/post-album.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 

@@ -1,5 +1,5 @@
-import { GetAllArtistsService } from './../../shared/services/artists/getAllArtists/get-all-artists.service';
 import { Component, OnInit } from '@angular/core';
+import { ArtistsService } from 'src/app/shared/services/artist/artists.service';
 
 @Component({
   selector: 'app-artists-page',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistsPageComponent implements OnInit {
 
-  constructor(private getAllArtists: GetAllArtistsService) { }
+  constructor(private artistsService: ArtistsService) { }
 
   artists:any;
 
@@ -22,7 +22,7 @@ export class ArtistsPageComponent implements OnInit {
     this.listArtists()
   }
   
-  listArtists = () => this.getAllArtists.getArtists().subscribe(res => {
+  listArtists = () => this.artistsService.getArtists().subscribe(res => {
     this.artists = res;
     // console.log(this.artists)
   })

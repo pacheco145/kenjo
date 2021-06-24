@@ -1,8 +1,7 @@
-import { DeleteAlbumService } from './../../shared/services/albums/deleteAlbum/delete-album.service';
-import { GetAlbumService } from './../../shared/services/albums/getAlbum/get-album.service';
+import { ArtistsService } from './../../shared/services/artist/artists.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetArtistService } from 'src/app/shared/services/artists/getArtist/get-artist.service';
+import { AlbumsService } from 'src/app/shared/services/albums/albums.service';
 
 @Component({
   selector: 'app-album-detail-page',
@@ -16,16 +15,15 @@ export class AlbumDetailPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router, 
-    private getOneAlbum: GetAlbumService, 
-    private getAlbumArtist: GetArtistService,
-    private deleteAlbum: DeleteAlbumService
+    private albumsService: AlbumsService, 
+    private artistsService: ArtistsService,
   ) { 
     this.route.params.subscribe(params => {
       this.id = params['id']
     })
   }
   
-  album:any;
+  album:any = {};
   artistName:any;
   artistId:any;
   
@@ -37,7 +35,7 @@ export class AlbumDetailPageComponent implements OnInit {
   }
   
   oneAlbum = () => {
-    this.getOneAlbum.getAlbumById(this.id).subscribe(res => {
+    this.albumsService.getAlbumById(this.id).subscribe(res => {
       console.log(res)
       this.album = res;
       this.artist(this.album.artistId)
@@ -45,7 +43,7 @@ export class AlbumDetailPageComponent implements OnInit {
   }
 
   artist = (artistId:string) => {
-    this.getAlbumArtist.getArtistById(artistId).subscribe((res:any) => {
+    this.artistsService.getArtistById(artistId).subscribe((res:any) => {
       console.log(res)
       this.artistName = res.name;
       this.artistId = res._id;
@@ -53,7 +51,7 @@ export class AlbumDetailPageComponent implements OnInit {
   }
 
   removeAlbum = () => {
-    this.deleteAlbum.deleteAlbum(this.id)
+    this.albumsService.deleteAlbum(this.id)
     this.router.navigateByUrl('/albums');
   }
 

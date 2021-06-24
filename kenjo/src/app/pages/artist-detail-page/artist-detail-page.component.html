@@ -1,4 +1,5 @@
-<div class="item-detail">
+<div class="item-detail" data-aos="fade-up" data-aos-easing="linear"
+data-aos-duration="700" data-aos-offset="100">
     <div class="item-detail__image">
         <img src={{artist.photoUrl}} alt="">
     </div>
@@ -20,7 +21,8 @@
 </div>
 
 <div class="items-container">
-    <div class="item" *ngFor="let album of albumsOfArtist">
+    <div class="item" *ngFor="let album of albumsOfArtist" data-aos="fade-up" data-aos-easing="linear"
+    data-aos-duration="700" data-aos-offset="100">
         <a href="/" [routerLink]="['/album/', album._id]">
             <div class="item__image">
                 <img src={{album.coverUrl}} alt="">

@@ -1,8 +1,8 @@
-import { GetAllArtistsService } from 'src/app/shared/services/artists/getAllArtists/get-all-artists.service';
-import { GetAllAlbumsService } from '../../shared/services/albums/getAllAlbums/get-all-albums.service';
+import { ArtistsService } from './../../shared/services/artist/artists.service';
+import { AlbumsService } from '../../shared/services/albums/albums.service';
 import { Component, OnInit } from '@angular/core';
 import {Album} from '../../shared/models/album.model'
-
+import * as AOS from 'aos';
 
 
 @Component({
@@ -14,7 +14,7 @@ import {Album} from '../../shared/models/album.model'
 
 export class AlbumsPageComponent implements OnInit {
   
-  constructor(private getAllAlbums: GetAllAlbumsService, private getAllArtists: GetAllArtistsService) { 
+  constructor(private albumsService: AlbumsService, private artistsService: ArtistsService) { 
     
   }
   albums: any;
@@ -23,15 +23,16 @@ export class AlbumsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.listAlbums()
+    AOS.init();
   }
 
-  listAlbums = () => this.getAllAlbums.getAlbums().subscribe(res=> {
+  listAlbums = () => this.albumsService.getAlbums().subscribe(res=> {
     this.albums = res;
     this.artistOfAlbumFunction(this.albums)
   })
 
   artistOfAlbumFunction = (albums:any) => {
-    this.getAllArtists.getArtists().subscribe((res:any)=>{
+    this.artistsService.getArtists().subscribe((res:any)=>{
       let artists = res
       albums.forEach((album:any) => {
         artists.forEach((artist:any) => {
