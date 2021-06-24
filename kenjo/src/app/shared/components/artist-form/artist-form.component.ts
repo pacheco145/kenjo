@@ -43,20 +43,37 @@ export class ArtistFormComponent implements OnInit {
   }
 
   datesError:any = {
-    birth: '', 
-    death: '', 
+    birth: {msg: '', dateData: ''}, 
+    death: {msg: '', dateData: ''}, 
+    compared: ''
   };
 
-  dateValidator = (date:any, birthOrDeath:string) => {
-      let parsedDate = new Date(date).getTime()
-      if (parsedDate > currentDate) {
-        this.datesError[birthOrDeath] = 'Date should be less than current date'
-      }
-      else this.datesError[birthOrDeath] = '';
-    
-  }
-
   
+  dateValidatorOne = (date:any, birthOrDeath:string) => {
+    let parsedDate = new Date(date).getTime()
+    this.datesError[birthOrDeath].dateData = parsedDate
+    if (parsedDate > currentDate) {
+      this.datesError[birthOrDeath].msg = 'Date should be less than current date'
+    }
+    else this.datesError[birthOrDeath].msg = '';
+  }
+  
+  dateValidatorTwo = () => {
+    const birthDate = this.datesError.birth.dateData
+    const deathDate = this.datesError.death.dateData
+    console.log(birthDate, 'and', deathDate)
+    if (deathDate < birthDate) {
+      this.datesError.compared = 'Death date cannot be before birthdate'
+    }
+    else {
+      this.datesError.compared = ''
+    }
+  }
+  
+  dateValidator = (date:any, birthOrDeath:string) => {
+    this.dateValidatorOne(date, birthOrDeath)
+    this.dateValidatorTwo()
+  }
 
   ngOnInit(): void {
     // console.log('PROPS',this.props)
@@ -82,10 +99,12 @@ export class ArtistFormComponent implements OnInit {
 
   chooseCrud = async() => {
     this.submitted = true;
+    this.message = ''
     this.dateValidator(this.newArtist.value.birthdate, 'birth')
     this.dateValidator(this.newArtist.value.deathDate, 'death')
+    console.log(this.newArtist.valid, '_', this.datesError.birth.msg, '_', this.datesError.death.msg, '_', this.datesError.compared)
 
-    if (this.newArtist.valid && this.datesError.birth && this.datesError.death) {
+    if (this.newArtist.valid && !this.datesError.birth.msg && !this.datesError.death.msg && !this.datesError.compared) {
 
       if (this.props.req === "post") await this.addArtist()
       else if (this.props.req === "put") await this.editArtist()
@@ -102,7 +121,7 @@ export class ArtistFormComponent implements OnInit {
 
 
   addArtist = () => {
-    // console.log(this.newArtist.value)
+    console.log(this.newArtist.value)
     if (!this.newArtist.value.photoUrl) {
       this.newArtist.value.photoUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
     }

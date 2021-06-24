@@ -17,15 +17,16 @@
         <label class="form__label" for="birthdate">
             <p>Birthdate:</p>
             <input class="form__input" type="date" name="birthdate" formControlName="birthdate" placeholder="birthdate" id="birthdate">
-            <span *ngIf="(!newArtist.get('birthdate').valid || datesError.birth) && submitted" class="form__valid">
-                * {{datesError.birth ? datesError.birth : 'Birthdate required'}}
+            <span *ngIf="(!newArtist.get('birthdate').valid || datesError.birth.msg) && submitted" class="form__valid">
+                * {{datesError.birth.msg ? datesError.birth.msg : 'Birthdate required'}}
             </span>
         </label>
         
         <label class="form__label" for="deathDate">
             <p>Death date:</p>
             <input class="form__input" type="date" name="deathDate" formControlName="deathDate" placeholder="deathDate" id="deathDate">
-            <span class="form__valid" *ngIf="datesError.death && submitted">* {{datesError.death}}</span>
+            <span class="form__valid" *ngIf="datesError.death.msg && submitted">* {{datesError.death.msg}}</span>
+            <span class="form__valid" *ngIf="datesError.compared && submitted">* {{datesError.compared}}</span>
         </label>
         
         <!-- <button type="submit">Add album</button> -->
