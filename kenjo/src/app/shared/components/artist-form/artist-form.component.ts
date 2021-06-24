@@ -117,8 +117,8 @@ export class ArtistFormComponent implements OnInit {
       this.setFormValues(res)
     })
   }
-
-
+  
+  
   addArtist = () => {
     // console.log(this.newArtist.value)
     if (!this.newArtist.value.photoUrl) {
@@ -126,7 +126,11 @@ export class ArtistFormComponent implements OnInit {
     }
     this.artistService.addArtist(this.newArtist.value).then(res=>{
       // console.log('RES', res)
-      if (!res.error) this.message = 'Artist added correctly'
+      if (!res.error) {
+        this.message = 'Artist added correctly'
+        this.newArtist.reset()
+        this.submitted = false
+      }
       else this.message = res.error.error
     })
   }

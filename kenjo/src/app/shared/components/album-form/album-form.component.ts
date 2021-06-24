@@ -83,8 +83,13 @@ export class AlbumFormComponent implements OnInit {
     // console.log(this.newAlbum.value)
     this.albumsService.addAlbum(this.newAlbum.value).then(res=>{
       // console.log('RES', res)
-      if (!res.error) this.message = 'Album added correctly'
+      if (!res.error) {
+        this.message = 'Album added correctly'
+        this.newAlbum.reset()
+        this.submitted = false
+      }
       else this.message = res.error.error
+      
     })
   }
 
