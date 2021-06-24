@@ -86,10 +86,6 @@ export class AlbumFormComponent implements OnInit {
       if (!res.error) this.message = 'Album added correctly'
       else this.message = res.error.error
     })
-    // .subscribe(res=>{
-    //   console.log('RES',this)
-    //   this.submitted = false;
-    // })
   }
 
   editAlbum = () => {

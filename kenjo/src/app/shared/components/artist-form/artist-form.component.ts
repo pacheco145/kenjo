@@ -1,11 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ArtistsService } from '../../services/artist/artists.service';
 
 
 const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+const currentDate = new Date().getTime();
 
 @Component({
   selector: 'app-artist-form',
@@ -17,7 +18,6 @@ export class ArtistFormComponent implements OnInit {
   @Input() props:any;
 
   id:any;
-  // artist:any;
   newArtist:any;
   button:any;
   message:string = '';
@@ -41,6 +41,21 @@ export class ArtistFormComponent implements OnInit {
       deathDate: '',
     });
   }
+
+  datesError:any = {
+    birth: '', 
+    death: '', 
+  };
+
+  dateValidator = (date:any, birthOrDeath:string) => {
+      let parsedDate = new Date(date).getTime()
+      if (parsedDate > currentDate) {
+        this.datesError[birthOrDeath] = 'Date should be less than current date'
+      }
+      else this.datesError[birthOrDeath] = '';
+    
+  }
+
   
 
   ngOnInit(): void {
@@ -55,8 +70,6 @@ export class ArtistFormComponent implements OnInit {
   }
 
   setFormValues = (artist:any) => {
-    // console.log(formatDate(artist.deathDate, 'yyyy-MM-dd', 'en'))
-    // console.log(artist.deathDate)
     if (artist.deathDate) artist.deathDate = formatDate(artist.deathDate, 'yyyy-MM-dd', 'en')
     
     this.newArtist.setValue({
@@ -69,7 +82,11 @@ export class ArtistFormComponent implements OnInit {
 
   chooseCrud = async() => {
     this.submitted = true;
-    if (this.newArtist.valid) {
+    this.dateValidator(this.newArtist.value.birthdate, 'birth')
+    this.dateValidator(this.newArtist.value.deathDate, 'death')
+
+    if (this.newArtist.valid && this.datesError.birth && this.datesError.death) {
+
       if (this.props.req === "post") await this.addArtist()
       else if (this.props.req === "put") await this.editArtist()
       // this.router.navigateByUrl('/artists');
