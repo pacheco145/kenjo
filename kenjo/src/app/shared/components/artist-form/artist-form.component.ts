@@ -62,7 +62,7 @@ export class ArtistFormComponent implements OnInit {
     const birthDate = this.datesError.birth.dateData
     const deathDate = this.datesError.death.dateData
     // console.log(birthDate, 'and', deathDate)
-    if (deathDate < birthDate) {
+    if (deathDate && (deathDate < birthDate)) {
       this.datesError.compared = 'Death date cannot be before birthdate'
     }
     else {
