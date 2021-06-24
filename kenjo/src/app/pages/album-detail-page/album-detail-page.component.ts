@@ -37,7 +37,7 @@ export class AlbumDetailPageComponent implements OnInit {
   
   oneAlbum = () => {
     this.albumsService.getAlbumById(this.id).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.album = res;
       this.artist(this.album.artistId)
     })
@@ -45,7 +45,7 @@ export class AlbumDetailPageComponent implements OnInit {
 
   artist = (artistId:string) => {
     this.artistsService.getArtistById(artistId).subscribe((res:any) => {
-      console.log(res)
+      // console.log(res)
       this.artistName = res.name;
       this.artistId = res._id;
     })

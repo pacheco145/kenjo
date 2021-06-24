@@ -44,7 +44,7 @@ export class AlbumFormComponent implements OnInit {
   
 
   ngOnInit(): void {
-    console.log('ID',this.id, typeof this.id)
+    // console.log('ID',this.id, typeof this.id)
     
     this.setButtonValues()
     if (this.props.req ==="put") this.getAlbumInfo()
@@ -82,7 +82,7 @@ export class AlbumFormComponent implements OnInit {
     this.newAlbum.value.artistId = this.id;
     // console.log(this.newAlbum.value)
     this.albumsService.addAlbum(this.newAlbum.value).then(res=>{
-      console.log('RES', res)
+      // console.log('RES', res)
       if (!res.error) this.message = 'Album added correctly'
       else this.message = res.error.error
     })
@@ -92,7 +92,7 @@ export class AlbumFormComponent implements OnInit {
     this.newAlbum.value.artistId = this.album.artistId;
     // console.log(this.newAlbum.value)
     this.albumsService.putAlbum(this.id, this.newAlbum.value).then(res=>{
-      console.log('RES', res)
+      // console.log('RES', res)
       if (!res.error) this.message = 'Album edited correctly'
       else this.message = res.error.errors
     })
