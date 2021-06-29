@@ -15,4 +15,18 @@ a {
 body {
     font-family: 'Merrant';
     color: var(--dark);
+    background-color: var(--bg-color);
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark);
+    border-radius: 10px;
+    margin: 5px;
+    border: 3px solid var( --bg-color);
 }

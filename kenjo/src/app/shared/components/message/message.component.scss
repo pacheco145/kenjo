@@ -1,0 +1,28 @@
+.msg-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    margin-top: 100px;
+    background-color: white;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    border: 4px solid var(--green);
+    border-radius: 45px;
+    color: var(--dark);
+    animation-name: hideMsg;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-in-out;
+    // top:-10px;
+}
+
+@keyframes hideMsg {
+    0%   {opacity:0; top:-100px;}
+    25%  {opacity:1; top:-10px;}
+    50%  {opacity:1; top:-10px;}
+    75%  {opacity:1; top:-10px;}
+    100% {opacity:0; top:-100px;}
+  }

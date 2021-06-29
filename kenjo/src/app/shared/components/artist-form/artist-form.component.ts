@@ -119,12 +119,12 @@ export class ArtistFormComponent implements OnInit {
   }
   
   
-  addArtist = () => {
+  addArtist = async() => {
     // console.log(this.newArtist.value)
     if (!this.newArtist.value.photoUrl) {
       this.newArtist.value.photoUrl = 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
     }
-    this.artistService.addArtist(this.newArtist.value).then(res=>{
+    await this.artistService.addArtist(this.newArtist.value).then(res=>{
       // console.log('RES', res)
       if (!res.error) {
         this.message = 'Artist added correctly'
@@ -133,14 +133,16 @@ export class ArtistFormComponent implements OnInit {
       }
       else this.message = res.error.error
     })
+    this.router.navigateByUrl('/artists', { state: { msg: 'Artist added correctly' } });
   }
 
-  editArtist = () => {
-    this.artistService.putArtist(this.id, this.newArtist.value).then(res=>{
+  editArtist = async() => {
+    await this.artistService.putArtist(this.id, this.newArtist.value).then(res=>{
       // console.log('RES', res)
       if (!res.error) this.message = 'Artist edited correctly'
       else this.message = res.error.error
     })
+    this.router.navigateByUrl('/artists', { state: { msg: 'Artist edited correctly' } });
   }
 
 }

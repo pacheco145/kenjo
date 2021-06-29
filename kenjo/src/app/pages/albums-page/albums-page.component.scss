@@ -10,3 +10,42 @@
         margin-right: 32px;
     }
 }
+
+.pagination {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 40px;
+    margin: 0 auto 70px;
+    max-width: 1200px;
+
+    &__page {
+        margin-right: 12px;
+    }
+
+    &__change {
+        width: 45px;
+        background-color: transparent;
+        border: none;
+        
+        img {
+            cursor: pointer;
+            width:100%;
+            opacity: .75;
+            transition: .2s ease-in-out;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.disabled img {
+    cursor: default;
+    opacity: 0.3;
+    &:hover {
+        opacity: .3;
+    }
+}

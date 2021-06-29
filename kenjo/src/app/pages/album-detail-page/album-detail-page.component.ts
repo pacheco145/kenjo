@@ -53,9 +53,9 @@ export class AlbumDetailPageComponent implements OnInit {
 
   clickRemove = () => this.removeCheck = !this.removeCheck;
 
-  removeAlbum = () => {
-    this.albumsService.deleteAlbum(this.id)
-    this.router.navigateByUrl('/albums');
+  removeAlbum = async() => {
+    await this.albumsService.deleteAlbum(this.id)
+    this.router.navigateByUrl('/albums', { state: { msg: 'Album removed correctly' } });
   }
 
 }

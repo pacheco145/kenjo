@@ -51,8 +51,8 @@ export class ArtistDetailPageComponent implements OnInit {
 
   clickRemove = () => this.removeCheck = !this.removeCheck;
 
-  removeArtist = () => {
-    this.artistsService.deleteArtist(this.id)
-    this.router.navigateByUrl('/artists');
+  removeArtist = async() => {
+    await this.artistsService.deleteArtist(this.id)
+    this.router.navigateByUrl('/artists', { state: { msg: 'Artist removed' } });
   }
 }

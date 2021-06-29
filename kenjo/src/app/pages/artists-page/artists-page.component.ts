@@ -10,19 +10,14 @@ import { ArtistsService } from 'src/app/shared/services/artist/artists.service';
 export class ArtistsPageComponent implements OnInit {
 
   constructor(private artistsService: ArtistsService, private router: Router) { }
+    
+    artists:any;
+    msg: string = '';
+    // showMsg = false;
 
-  artists:any;
-
-
-
-  // props:any = {
-  //   url:"/artist/",
-  //   typeOfInfo: "artists",
-  // }
 
   ngOnInit(): void {
-
-    console.log(this.router.getCurrentNavigation())
+    if (history.state.msg) this.msg = history.state.msg
     this.listArtists()
   }
   
@@ -30,5 +25,13 @@ export class ArtistsPageComponent implements OnInit {
     this.artists = res;
     // console.log(this.artists)
   })
+
+  // hideMessage = () => {
+  //   this.msg = history.state.msg
+  //   this.showMsg = true;
+  //   setTimeout(() => {
+  //     this.showMsg = false;
+  //   }, 2000)
+  // }
 
 }

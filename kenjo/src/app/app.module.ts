@@ -16,6 +16,8 @@ import { AlbumFormComponent } from './shared/components/album-form/album-form.co
 import { ArtistFormComponent } from './shared/components/artist-form/artist-form.component';
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageComponent } from './shared/components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
     ArtistFormComponent,
     EditAlbumComponent,
     EditArtistComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

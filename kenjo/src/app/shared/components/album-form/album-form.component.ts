@@ -78,10 +78,10 @@ export class AlbumFormComponent implements OnInit {
   
   
   
-  addAlbum = () => {
+  addAlbum = async () => {
     this.newAlbum.value.artistId = this.id;
     // console.log(this.newAlbum.value)
-    this.albumsService.addAlbum(this.newAlbum.value).then(res=>{
+    await this.albumsService.addAlbum(this.newAlbum.value).then(res=>{
       // console.log('RES', res)
       if (!res.error) {
         this.message = 'Album added correctly'
@@ -91,16 +91,18 @@ export class AlbumFormComponent implements OnInit {
       else this.message = res.error.error
       
     })
+    this.router.navigateByUrl('/albums', { state: { msg: 'Album added correctly' } });
   }
 
-  editAlbum = () => {
+  editAlbum = async() => {
     this.newAlbum.value.artistId = this.album.artistId;
     // console.log(this.newAlbum.value)
-    this.albumsService.putAlbum(this.id, this.newAlbum.value).then(res=>{
+    await this.albumsService.putAlbum(this.id, this.newAlbum.value).then(res=>{
       // console.log('RES', res)
       if (!res.error) this.message = 'Album edited correctly'
       else this.message = res.error.errors
     })
+    this.router.navigateByUrl('/albums', { state: { msg: 'Album edited correctly' } });
   }
 
   getAlbumInfo = () => {

@@ -1,9 +1,10 @@
+<app-message [msg]="msg"></app-message>
 <div class="albums-header">
     <h1>Albums</h1>
 </div>
 <div class="items-container">
-    <div class="item" *ngFor="let album of albums" data-aos="fade-up" data-aos-easing="linear"
-    data-aos-duration="700" data-aos-offset="100" data-aos-once="true">
+    <div class="item" *ngFor="let album of albumsByPage" data-aos="fade-in" data-aos-easing="ease-in-out"
+    data-aos-duration="500" data-aos-offset="200" data-aos-once="true">
         <a href="/" [routerLink]="['/album/', album._id]">
             <div class="item__image">
                 <img src={{album.coverUrl}} alt="">
@@ -21,4 +22,18 @@
             </div>
         </a>
     </div>
+</div>
+<div class="pagination">
+    <span class="pagination__page">Pag. {{page}}</span>
+    <button class="pagination__change" [disabled]="page <= 1" (click)="pageDown()" [ngClass]="{'disabled': page <= 1}">
+        <img src="/assets/icons/iconmonstr-arrow-28.svg" alt="" style="transform: rotate(180deg);">
+    </button>
+    <button 
+        class="pagination__change" 
+        (click)="pageUp()" 
+        [disabled]="albumsByPage && albumsByPage.length < 12" 
+        [ngClass]="{'disabled': albumsByPage && albumsByPage.length < 12}"
+    >
+        <img src="/assets/icons/iconmonstr-arrow-28.svg" alt="">
+    </button>
 </div>

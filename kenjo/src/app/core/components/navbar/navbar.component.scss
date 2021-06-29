@@ -2,10 +2,13 @@
     box-shadow: 0 1px 7px 0 rgb(51 51 51 / 20%);
     top: 0;
     z-index: 3;
-    padding: 25px 20px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: sticky;
     text-align: center;
-    background-color: white;
+    background-color: var(--bg-color);
 
     &__option {
         font-family: 'Adequate W01',sans-serif;

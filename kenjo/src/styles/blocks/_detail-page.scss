@@ -5,6 +5,9 @@
     padding: 0 calc(16px + 5%);
     flex-wrap: wrap;
     justify-content: center;
+    padding: 50px calc(16px + 5%);
+    height: calc(100vh - 70px);
+    margin: 0 auto;
     // display: grid;
     // grid-template-columns: repeat(auto-fill, minmax(2fr 1fr));
     // justify-content: center;
@@ -89,7 +92,7 @@
         }
 
         &__info {
-            margin-top: 16px;
+            margin: 16px 0;
             padding: 0 24px;
             font-size: 0.9rem;
         }
